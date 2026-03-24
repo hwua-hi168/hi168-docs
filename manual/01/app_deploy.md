@@ -1,5 +1,5 @@
 ### 应用部署
-#### 1、选择应用
+#### 1、选择应用.
 ![alt text](../help_picture/01_appcentor02.png)
 #### 2、开始部署
 ![alt text](../help_picture/01_appcentor03.png)
