@@ -1,0 +1,36 @@
+# =============================================================================
+# Hi168 Docs — Build & Deploy Tasks
+# =============================================================================
+version: '3'
+
+vars:
+  REGISTRY: registry.cn-hangzhou.aliyuncs.com/quantanexus
+  IMAGE_NAME: help-docs
+  TAG:
+    sh: cat VERSION 2>/dev/null || echo "v0.0.0"
+
+tasks:
+  image:
+    desc: "Build Docker image"
+    cmds:
+      - echo ">>> Building image {{.REGISTRY}}/{{.IMAGE_NAME}}:{{.TAG}}..."
+      - docker build --no-cache -t {{.REGISTRY}}/{{.IMAGE_NAME}}:{{.TAG}} .
+      - 'echo "✓ Image: {{.REGISTRY}}/{{.IMAGE_NAME}}:{{.TAG}}"'
+
+  push:
+    desc: "Push image to registry"
+    cmds:
+      - docker push {{.REGISTRY}}/{{.IMAGE_NAME}}:{{.TAG}}
+      - 'echo "✓ Pushed: {{.REGISTRY}}/{{.IMAGE_NAME}}:{{.TAG}}"'
+
+  release:
+    desc: "Release to registry (image + push)"
+    cmds:
+      - task: image
+      - task: push
+      - 'echo "✓ Released help-docs:{{.TAG}}"'
+
+  dev:
+    desc: "Serve docs locally with docsify"
+    cmds:
+      - npx docsify-cli serve . --port 3000
