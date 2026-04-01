@@ -3,7 +3,7 @@
   * [应用服务](./application-services)
   * [模板与镜像管理](./template-image)
   * [空间与存储管理](./workspace-storage)
-* **教学与学习**
+* **课程与直播**
   * [在线学习](./online-learning)
   * [教学管理](./teaching-management)
 * **AI 与数据**
