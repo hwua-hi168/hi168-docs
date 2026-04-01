@@ -1,4 +1,3 @@
-* [文档首页](./docs/README)
 * **云端应用**
   * [应用服务](./docs/application-services)
   * [模板与镜像管理](./docs/template-image)
@@ -20,4 +19,3 @@
   * [平台与个人设置](./docs/platform-settings)
 * **附录**
   * [计费规则](./docs/appendix)
-* [返回首页](home)
