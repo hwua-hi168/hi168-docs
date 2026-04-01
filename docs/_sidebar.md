@@ -2,7 +2,7 @@
 * **云端应用**
   * [应用服务](./application-services)
   * [模板与镜像管理](./template-image)
-* **云端互联与存储**
+* **空间与存储**
   * [空间与存储管理](./workspace-storage)
 * **网络仿真**
   * [拓扑管理](./topology)
