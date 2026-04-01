@@ -85,12 +85,12 @@
         }
 
         .collapse-btn {
-            position: absolute;
-            left: -15px;
-            top: 2px;
+            display: inline-block;
+            margin-right: 6px;
             font-size: 10px;
             transition: transform 0.2s;
-            padding-right: 5px;
+            cursor: pointer;
+            padding: 4px 8px;
         }
 
         /* 展开时旋转箭头 */
@@ -154,29 +154,84 @@
             subMaxLevel: 4, // 设置侧边栏嵌套层级
             plugins: [
             function(hook) {
+                // 记录用户手动折叠/展开的状态，key 为分类文字
+                var manualState = {};
+                var initialized = false;
+
                 hook.doneEach(function() {
-                // 添加折叠功能
-                let nodes = document.querySelectorAll('.sidebar-nav ul li');
-                nodes.forEach(node => {
-                    // 添加箭头图标
-                    if (node.querySelector('ul')) {
-                    const span = document.createElement('span');
+                var currentPath = (window.location.hash || '#/').replace('#', '');
+
+                var nodes = document.querySelectorAll('.sidebar-nav > ul > li');
+                nodes.forEach(function(node) {
+                    var subUl = node.querySelector('ul');
+                    if (!subUl) return;
+
+                    // 用分类标题文字作为 key
+                    var strong = node.querySelector('strong') || node.querySelector('p');
+                    var key = strong ? strong.textContent.trim() : node.textContent.trim().substring(0, 20);
+
+                    // 清除可能残留的旧箭头
+                    node.querySelectorAll('.collapse-btn').forEach(function(el) { el.remove(); });
+
+                    // 添加箭头
+                    var span = document.createElement('span');
                     span.className = 'collapse-btn';
                     span.innerHTML = '▶';
                     node.insertBefore(span, node.firstChild);
+
+                    // 判断当前页面是否属于这个分类
+                    var hasActivePage = false;
+                    subUl.querySelectorAll('a').forEach(function(a) {
+                    var href = (a.getAttribute('href') || '').replace('#/', '/').replace('./', '/');
+                    if (currentPath.length > 1 && currentPath.indexOf(href) > -1) {
+                        hasActivePage = true;
+                    }
+                    });
+
+                    // 决定展开/折叠
+                    var shouldOpen;
+                    if (key in manualState) {
+                    // 用户手动操作过，尊重用户选择
+                    shouldOpen = manualState[key];
+                    } else if (hasActivePage) {
+                    // 当前页面在此分类下，自动展开
+                    shouldOpen = true;
+                    } else {
+                    // 默认折叠
+                    shouldOpen = false;
                     }
 
-                    // 点击事件
-                    node.addEventListener('click', function(e) {
-                    if (e.target.className === 'collapse-btn') {
-                        const ul = node.querySelector('ul');
-                        if (ul) {
-                        ul.style.display = ul.style.display === 'none' ? 'block' : 'none';
-                        e.target.style.transform = ul.style.display === 'none' 
-                            ? 'rotate(0deg)' 
-                            : 'rotate(90deg)';
-                        }
+                    subUl.style.display = shouldOpen ? 'block' : 'none';
+                    span.style.transform = shouldOpen ? 'rotate(90deg)' : 'rotate(0deg)';
+
+                    // 点击箭头切换
+                    span.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    var isHidden = subUl.style.display === 'none';
+                    subUl.style.display = isHidden ? 'block' : 'none';
+                    span.style.transform = isHidden ? 'rotate(90deg)' : 'rotate(0deg)';
+                    manualState[key] = isHidden; // 记录用户操作
+                    });
+
+                    // 点击分类标题切换
+                    if (strong) {
+                    strong.style.cursor = 'pointer';
+                    strong.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        var isHidden = subUl.style.display === 'none';
+                        subUl.style.display = isHidden ? 'block' : 'none';
+                        span.style.transform = isHidden ? 'rotate(90deg)' : 'rotate(0deg)';
+                        manualState[key] = isHidden;
+                    });
                     }
+
+                    // 点击子链接时，标记该分类为展开（防止导航后被折叠）
+                    subUl.querySelectorAll('a').forEach(function(a) {
+                    a.addEventListener('click', function() {
+                        manualState[key] = true;
+                    });
                     });
                 });
                 });
