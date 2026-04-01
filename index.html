@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
+    <title>Hi168 帮助文档</title>
     <link rel="stylesheet" href="vue.css" />
     <style>
+        /* 确保页面有白色背景，嵌入 iframe 时也可见 */
+        html, body {
+            background-color: #fff !important;
+        }
+
         /* 模态框样式 */
         #modal {
             display: none;
@@ -96,7 +102,7 @@
 
 <body>
   
-    <div data-app id="main">加载中......</div>
+    <div id="app">加载中......</div>
 
     <!-- 模态框结构 -->
     <div id="modal">
@@ -122,15 +128,20 @@
                 if (link === 'abcImage') {
                     link = 'abcimage'
                 }
-                link1 = '01/' + link + '.md';
+                // 尝试匹配 docs/ 或 manual/ 路径，兼容旧的 01/ 路径
+                if (link.startsWith('docs/') || link.startsWith('manual/')) {
+                    link1 = link + '.md';
+                } else {
+                    link1 = 'manual/01/' + link + '.md';
+                }
             }
         }
 
         // 配置 docsify 选项
         window.$docsify = {
-            basePath: '../',
+            basePath: './',
             themeColor: '#990066',
-            el: '#main',
+            el: '#app',
             homepage: link1,
             notFoundPage: true,
             loadNavbar: '_navbar.md',
@@ -140,7 +151,6 @@
             },
             subMaxLevel: 4,
             repo: '',
-
             subMaxLevel: 4, // 设置侧边栏嵌套层级
             plugins: [
             function(hook) {
