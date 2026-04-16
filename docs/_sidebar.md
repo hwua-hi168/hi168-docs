@@ -2,7 +2,8 @@
   * [应用服务](./docs/application-services)
   * [模板与镜像管理](./docs/template-image)
 * **空间与存储**
-  * [空间与存储管理](./docs/workspace-storage)
+  * [存储管理](./docs/storage)
+  * [空间管理](./docs/workspace)
 * **网络仿真**
   * [拓扑管理](./docs/topology)
 * **AI 与编程**
