@@ -7,6 +7,7 @@
 * **网络仿真**
   * [拓扑管理](./docs/topology)
 * **AI 与编程**
+  * [AI Playground](./docs/ai-playground)
   * [数据集及模型](./docs/dataset-model)
   * [Notebook](./docs/notebook)
 * **内容与协作**
