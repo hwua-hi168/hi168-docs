@@ -15,6 +15,8 @@
   * [教学管理](./docs/teaching-management)
   * [共创中心](./docs/co-creation)
   * [社区交流](./docs/community)
+* **组织与管理**
+  * [组织管理](./docs/organization)
 * **平台信息**
   * [平台功能总览](./docs/microservices)
   * [平台更新与维护](./docs/deployment)
