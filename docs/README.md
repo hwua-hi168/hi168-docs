@@ -17,7 +17,7 @@ Hi168 是一站式云计算服务平台，集成了云端应用部署、对象�
 | [空间与存储管理](./docs/workspace-storage.md) | 命名空间的创建与隔离管理、存储桶的创建与内容操作、文件分享与在线预览 |
 | [在线学习](./docs/online-learning.md) | 课程浏览与加入、课程详情与播放、直播教学的创建与参与、直播回放、我的班级管理 |
 | [教学管理](./docs/teaching-management.md) | 课程制作与发布、教务管理（班级与学生管理）、求职就业岗位发布 |
-| [数据集及模型](./docs/dataset-model.md) | AI 模型的浏览与管理、数据集的上传与引用、模型训练数据支撑 |
+| [模型数据集](./docs/dataset-model.md) | AI 模型与数据集的创建、上传、检索与发布，支持从 HuggingFace、ModelScope、GitHub 第三方导入 |
 | [Notebook](./docs/notebook.md) | 交互式计算笔记本的创建与管理、在线编程与数据分析、模型训练与可视化 |
 | [拓扑管理](./docs/topology.md) | 可视化网络拓扑编排、基础设施组件管理、网络实验环境搭建 |
 | [平台功能总览](./docs/microservices.md) | 平台各功能模块介绍、使用场景示例 |

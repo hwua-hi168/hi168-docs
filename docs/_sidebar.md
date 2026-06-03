@@ -9,6 +9,7 @@
 * **AI 与编程**
   * [AI Playground](./docs/ai-playground)
   * [Notebook](./docs/notebook)
+  * [模型数据集](./docs/dataset-model)
 * **内容与协作**
   * [在线学习](./docs/online-learning)
   * [教学管理](./docs/teaching-management)
